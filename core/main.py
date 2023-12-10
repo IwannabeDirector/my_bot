@@ -1,11 +1,12 @@
 from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message, ContentType
-from core.handlers.basic import get_start
+from aiogram.filters import Command
+from aiogram.client.session.aiohttp import AiohttpSession
 import asyncio
 import logging
 
 from core.settings import settings
-from aiogram.filters import Command
+from core.handlers.basic import get_start
 
 
 async def start_bot(bot: Bot):
@@ -17,6 +18,7 @@ async def stop_bot(bot: Bot):
 
 
 async def start():
+	session = AiohttpSession(proxy='http://proxy.server:3128')
 	logging.basicConfig(level=logging.INFO,
 						format='%(asctime)s - [%(levelname)s] - %(name)s - '
 								'(%(filename)s).%(funcName)s(%(lineno)d) - %(message)s'
