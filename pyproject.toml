@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "my-bot"
+version = "0.1.0"
+description = ""
+authors = ["IwannabeDirector <a.nikitin1@g.nsu.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiogram = "^3.2.0"
+asyncio = "^3.4.3"
+logging = "^0.4.9.6"
+environs = "^9.5.0"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
