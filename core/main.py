@@ -6,6 +6,7 @@ import logging
 from core.settings import settings
 from core.handlers.basic import get_start
 from core.database import user_info
+from core.handlers import always
 
 
 async def start_bot(bot: Bot):
@@ -31,6 +32,7 @@ async def start():
 	dp.shutdown.register(stop_bot)
 	dp.message.register(get_start, Command(commands=['start']))
 	dp.include_router(user_info.router_main)
+	dp.include_router(always.da)
 	try:
 		await dp.start_polling(bot)
 	finally:
