@@ -6,7 +6,6 @@ import logging
 from core.settings import settings
 from core.handlers.basic import get_start
 from core.database import user_info
-from core.utilis import commands
 
 
 async def start_bot(bot: Bot):
@@ -27,7 +26,7 @@ async def start():
 
 	dp = Dispatcher()
 	await bot.delete_webhook(drop_pending_updates=True)
-	await commands.set_default_commands(bot)
+	#await commands.set_default_commands(bot)
 	dp.startup.register(start_bot)
 	dp.shutdown.register(stop_bot)
 	dp.message.register(get_start, Command(commands=['start']))

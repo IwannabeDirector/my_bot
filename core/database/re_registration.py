@@ -18,7 +18,7 @@ class ReRegistrationStates(StatesGroup):
     waiting_for_new_birthday = State()
 
 
-@router2.message(F.text == '/rereg')
+@router2.message(F.text == '/rereg@o4ko_bibka_bot')
 async def start_rereg(message: Message, state: FSMContext):
     user_id = message.from_user.id
 
@@ -67,6 +67,7 @@ async def process_new_age(message: Message, state: FSMContext):
         database.commit()
         database.close()
         await message.answer('Возраст обновлен')
+        await state.clear()
 
 
 @router2.callback_query(lambda c: c.data == 'birthday')

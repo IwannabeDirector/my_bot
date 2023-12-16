@@ -13,7 +13,7 @@ router_main = Router()
 router_main.include_routers(router1, router2)
 
 
-@router_main.message(F.text == '/myinfo')
+@router_main.message(F.text == '/myinfo@o4ko_bibka_bot')
 async def user_info(message: Message):
 	user_id = message.from_user.id
 

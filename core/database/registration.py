@@ -20,7 +20,7 @@ class RegistrationStates(StatesGroup):
 	waiting_for_new_birthday = State()
 
 
-@router1.message(F.text == '/reg')
+@router1.message(F.text == '/reg@o4ko_bibka_bot')
 async def start_reg(message: Message, state: FSMContext):
 	user_id = message.from_user.id
 
