@@ -63,7 +63,6 @@ async def process_birthday(message: Message, state: FSMContext):
 		age = user_data.get('input_age')
 		user_id = message.from_user.id
 		user_name = message.from_user.first_name
-		print('xx')
 		base_path = os.path.dirname(os.path.abspath(__file__))
 		db_path = os.path.join(base_path, 'reg_base.sqlite')
 		database = sqlite3.connect(db_path)

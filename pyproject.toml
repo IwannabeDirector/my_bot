@@ -12,6 +12,8 @@ asyncio = "^3.4.3"
 logging = "^0.4.9.6"
 environs = "^9.5.0"
 aiocron = "^1.8"
+apscheduler = "^3.10.4"
+schedule = "^1.2.1"
 
 
 [tool.poetry.group.dev.dependencies]
