@@ -35,9 +35,9 @@ async def start():
 	dp.include_router(user_info.router_main)
 	dp.include_router(always.da)
 	dp.include_router(cocksize.cocksize)
+	await delete_from_database.start_scheduler()
 	try:
 		await dp.start_polling(bot)
-		delete_from_database.start_scheduler()
 	finally:
 		await bot.session.close()
 
