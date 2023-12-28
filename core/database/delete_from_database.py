@@ -1,8 +1,5 @@
 import sqlite3
-import aioschedule
-import time
 import os
-import asyncio
 
 
 async def delete_data():
@@ -17,18 +14,4 @@ async def delete_data():
 
 	database.commit()
 	database.close()
-
-	print('kek')
-
-
-async def job():
-	await delete_data()
-
-
-async def start_scheduler():
-	print('start def first')
-	aioschedule.every().day.at("00:00").do(job)
-	while True:
-		await aioschedule.run_pending()
-		await asyncio.sleep(1)
-		print('start def')
+	print('delete')

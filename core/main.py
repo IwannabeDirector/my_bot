@@ -2,12 +2,15 @@ from aiogram import Bot, Dispatcher
 from aiogram.filters import Command
 import asyncio
 import logging
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from datetime import datetime
 
 from core.settings import settings
 from core.handlers.basic import get_start
 from core.database import user_info, delete_from_database
-from core.handlers import always, cocksize
-from core.utilis import commands
+from core.handlers import always, cocksize, roulette
+from core.utilis import commands, sheduler
+
 
 
 async def start_bot(bot: Bot):
@@ -27,6 +30,9 @@ async def start():
 	bot = Bot(token=settings.bots.bot_token, parse_mode='HTML')
 
 	dp = Dispatcher()
+	scheduler = AsyncIOScheduler(timezone='Asia/Novosibirsk')
+	scheduler.add_job(sheduler.start_scheduler, trigger='date', run_date=datetime.now())
+	scheduler.start()
 	await bot.delete_webhook(drop_pending_updates=True)
 	await commands.set_default_commands(bot)
 	dp.startup.register(start_bot)
@@ -34,8 +40,9 @@ async def start():
 	dp.message.register(get_start, Command(commands=['start']))
 	dp.include_router(user_info.router_main)
 	dp.include_router(always.da)
-	dp.include_router(cocksize.cocksize)
-	await delete_from_database.start_scheduler()
+	dp.include_router(cocksize.cock_size)
+	#dp.include_router(roulette.roulette)
+	# await sheduler.start_scheduler()
 	try:
 		await dp.start_polling(bot)
 	finally:
