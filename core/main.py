@@ -12,7 +12,6 @@ from core.handlers import always, cocksize, roulette
 from core.utilis import commands, sheduler
 
 
-
 async def start_bot(bot: Bot):
 	await bot.send_message(settings.bots.admin_id, text='Bot started')
 
@@ -41,8 +40,7 @@ async def start():
 	dp.include_router(user_info.router_main)
 	dp.include_router(always.da)
 	dp.include_router(cocksize.cock_size)
-	#dp.include_router(roulette.roulette)
-	# await sheduler.start_scheduler()
+	dp.include_router(roulette.roulette)
 	try:
 		await dp.start_polling(bot)
 	finally:

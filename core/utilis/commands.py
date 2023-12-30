@@ -19,6 +19,14 @@ async def set_default_commands(bot: Bot):
 		BotCommand(
 			command='/myinfo',
 			description='Информация о смешарике'
+		),
+		BotCommand(
+			command='/pidor',
+			description='Пидор дня'
+		),
+		BotCommand(
+			command='/run',
+			description='Красавчик дня'
 		)
 	]
 

@@ -74,7 +74,6 @@ async def process_birthday(message: Message, state: FSMContext):
 		database.commit()
 		database.close()
 		await message.answer('Чухан, ты зареган')
-		print('aa')
 		await state.clear()
 
 	except ValueError:
