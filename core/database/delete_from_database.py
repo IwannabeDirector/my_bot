@@ -14,4 +14,3 @@ async def delete_data():
 
 	database.commit()
 	database.close()
-	print('delete')

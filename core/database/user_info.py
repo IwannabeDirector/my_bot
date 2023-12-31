@@ -23,7 +23,7 @@ async def user_info(message: Message):
 	cursor = database.cursor()
 
 	cursor.execute(
-		'SELECT * FROM users WHERE id=?', (user_id,)
+		'SELECT name, age, birthday, cocksize_day, pidor_count, run_count FROM users WHERE id=?', (user_id,)
 	)
 	info = cursor.fetchone()
 	database.close()
@@ -32,9 +32,9 @@ async def user_info(message: Message):
 			'name': 'Имя',
 			'age': 'Возраст',
 			'birthday': 'Дата рождения',
-			'pidor': 'Пидор дня',
-			'run': 'Красавчик дня',
-			'artpub': 'Алкаш дня'
+			'cocksize_day': 'Cocksize',
+			'pidor_count': 'Пидор дня',
+			'run_count': 'Красавчик дня'
 		}
 		columns = [desc[0] for desc in cursor.description]
 		user_info = '\n'.join([f'{labels[column]}: {value}' for column, value in zip(columns, info) if column != 'id'])

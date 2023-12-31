@@ -1,4 +1,5 @@
 import random
+import asyncio
 
 from aiogram import Bot
 from aiogram.types import Message
@@ -20,14 +21,15 @@ async def start_pidor_roulette(message: Message, bot: Bot):
 	value = 1
 	column_count = 'pidor_count'
 
-	print(take_value(column))
 	if take_value(column):
 		participants = take_reg_users('run_day')
-		print(participants)
 		if participants:
 			pidor = random.choice(participants)
 			pidor = pidor[0]
-			await message.answer(f'{pidor} - пидор дня!')
+			# await asyncio.sleep(1)
+			# await message.answer('Кто пидор?')
+			await asyncio.sleep(1)
+			await message.answer(f'{pidor} - пидор!')
 			database_entry(pidor, column, value)
 			new_value = count_value(pidor, column_count)
 
@@ -44,11 +46,13 @@ async def start_run_roulette(message: Message, bot: Bot):
 
 	if take_value(column):
 		participants = take_reg_users('pidor_day')
-		print(participants)
 		if participants:
 			run = random.choice(participants)
 			run = run[0]
-			await message.answer(f'{run} - пидор дня!')
+			# await asyncio.sleep(1)
+			# await message.answer('Кто красавчик?')
+			await asyncio.sleep(1)
+			await message.answer(f'{run} - красавчик!')
 			database_entry(run, column, value)
 			new_value = count_value(run, column_count)
 	else:
