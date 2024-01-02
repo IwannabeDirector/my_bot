@@ -10,7 +10,7 @@ def scheduler_roulette_test(column):
 
 	cursor.execute("""
 		SELECT CASE 
-			WHEN COUNT(*) = COUNT({}) THEN 1
+			WHEN COUNT({}) = 0 THEN 1
 			ELSE 0	
 		END AS result
 		FROM users
@@ -18,5 +18,6 @@ def scheduler_roulette_test(column):
 	result = cursor.fetchone()[0]
 
 	database.close()
+	print(result)
 
 	return result

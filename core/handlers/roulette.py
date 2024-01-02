@@ -24,10 +24,9 @@ async def start_pidor_roulette(message: Message, bot: Bot):
 	if take_value(column):
 		participants = take_reg_users('run_day')
 		if participants:
-			pidor = random.choice(participants)
-			pidor = pidor[0]
-			# await asyncio.sleep(1)
-			# await message.answer('Кто пидор?')
+			pidor = random.choice(participants)[0]
+			await asyncio.sleep(1)
+			await message.answer('Кто пидор?')
 			await asyncio.sleep(1)
 			await message.answer(f'{pidor} - пидор!')
 			database_entry(pidor, column, value)
@@ -47,10 +46,9 @@ async def start_run_roulette(message: Message, bot: Bot):
 	if take_value(column):
 		participants = take_reg_users('pidor_day')
 		if participants:
-			run = random.choice(participants)
-			run = run[0]
-			# await asyncio.sleep(1)
-			# await message.answer('Кто красавчик?')
+			run = random.choice(participants)[0]
+			await asyncio.sleep(1)
+			await message.answer('Кто красавчик?')
 			await asyncio.sleep(1)
 			await message.answer(f'{run} - красавчик!')
 			database_entry(run, column, value)

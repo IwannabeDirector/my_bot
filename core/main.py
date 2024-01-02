@@ -8,7 +8,7 @@ from datetime import datetime
 from core.settings import settings
 from core.handlers.basic import get_start
 from core.database import user_info, delete_from_database
-from core.handlers import always, cocksize, roulette
+from core.handlers import always, cocksize, roulette, scheduler_roulette
 from core.utilis import commands, sheduler
 
 
@@ -26,14 +26,24 @@ async def start():
 						format='%(asctime)s - [%(levelname)s] - %(name)s - '
 								'(%(filename)s).%(funcName)s(%(lineno)d) - %(message)s'
 						)
-	bot = Bot(token=settings.bots.bot_token, parse_mode='HTML')
+	global my_bot
+	my_bot = Bot(token=settings.bots.bot_token, parse_mode='HTML')
 
 	dp = Dispatcher()
+
 	scheduler = AsyncIOScheduler(timezone='Asia/Novosibirsk')
-	scheduler.add_job(sheduler.start_scheduler, trigger='date', run_date=datetime.now())
+	scheduler.add_job(
+		sheduler.start_roulette, trigger='cron', hour=12,
+		minute=0, start_date=datetime.now(), kwargs={'bot': my_bot}
+	)
+	scheduler.add_job(
+		sheduler.delete_task, trigger='cron', hour=11,
+		minute=49, start_date=datetime.now()
+	)
 	scheduler.start()
-	await bot.delete_webhook(drop_pending_updates=True)
-	await commands.set_default_commands(bot)
+
+	await my_bot.delete_webhook(drop_pending_updates=True)
+	await commands.set_default_commands(my_bot)
 	dp.startup.register(start_bot)
 	dp.shutdown.register(stop_bot)
 	dp.message.register(get_start, Command(commands=['start']))
@@ -42,9 +52,9 @@ async def start():
 	dp.include_router(cocksize.cock_size)
 	dp.include_router(roulette.roulette)
 	try:
-		await dp.start_polling(bot)
+		await dp.start_polling(my_bot)
 	finally:
-		await bot.session.close()
+		await my_bot.session.close()
 
 
 if __name__ == '__main__':
