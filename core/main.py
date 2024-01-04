@@ -10,6 +10,7 @@ from core.handlers.basic import get_start
 from core.database import user_info, delete_from_database
 from core.handlers import always, cocksize, roulette, scheduler_roulette
 from core.utilis import commands, sheduler
+from core.database import roulette_general_info
 
 
 async def start_bot(bot: Bot):
@@ -51,6 +52,7 @@ async def start():
 	dp.include_router(always.da)
 	dp.include_router(cocksize.cock_size)
 	dp.include_router(roulette.roulette)
+	dp.include_router(roulette_general_info.roulette_info)
 	try:
 		await dp.start_polling(my_bot)
 	finally:

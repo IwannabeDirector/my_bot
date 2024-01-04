@@ -8,9 +8,10 @@ from core.database.write_in_database import database_entry
 from core.database.value_test import take_value
 from core.database.take_day_value import take_day_value
 from core.database.count_value import count_value
+from core.settings import settings
 
 
-chat_id = -4079228075
+chat_id = settings.bots.chat_id
 
 
 async def scheduler_pidor_roulette(bot: Bot):

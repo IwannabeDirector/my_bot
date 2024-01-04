@@ -27,6 +27,18 @@ async def set_default_commands(bot: Bot):
 		BotCommand(
 			command='/run',
 			description='Красавчик дня'
+		),
+		BotCommand(
+			command='/cocksize',
+			description='CockSize'
+		),
+		BotCommand(
+			command='/pidorstats',
+			description='pidorstats'
+		),
+		BotCommand(
+			command='/runstats',
+			description='runstats'
 		)
 	]
 

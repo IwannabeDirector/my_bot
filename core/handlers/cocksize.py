@@ -14,7 +14,7 @@ step_20 = ["😎", "🤓", "🤠", "🥳", "😋"]
 step_25 = ["🤩", "😇", "😘"]
 
 
-@cock_size.message(F.text == '/cock_size@o4ko_bibka_bot')
+@cock_size.message(F.text == '/cocksize@o4ko_bibka_bot')
 async def analysis_cock_size(message: Message, bot: Bot):
 	user_id = message.from_user.id
 	cock_size = round(random.gauss(12, 20))
