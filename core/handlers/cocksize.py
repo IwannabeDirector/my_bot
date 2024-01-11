@@ -10,6 +10,14 @@ from core.database.cocksize_db import *
 cock_size = Router()
 
 
+async def send_response(message, bot, penis_size: float, emoji: str, sticker: str):
+	if penis_size <= 1:
+		await message.answer(f"My dick is less 1 cm {emoji}")
+	else:
+		await message.answer(f"My dick is {penis_size} cm {emoji}")
+	await bot.send_sticker(chat_id=message.chat.id, sticker=sticker)
+
+
 @cock_size.message(F.text == '/cocksize@o4ko_bibka_bot')
 async def analysis_cock_size(message: Message, bot: Bot):
 	user_id = message.from_user.id
@@ -28,12 +36,7 @@ async def analysis_cock_size(message: Message, bot: Bot):
 		grp = get_group(cock_size)
 		emoji, sticker = main(grp)
 
-		if grp == 0:
-			await message.answer(f"My dick is less 1 cm {emoji}")
-			await bot.send_sticker(chat_id=message.chat.id, sticker=sticker)
-		else:
-			await message.answer(f"My dick is {cock_size} cm {emoji}")
-			await bot.send_sticker(chat_id=message.chat.id, sticker=sticker)
+		await send_response(message, bot, cock_size, emoji, sticker)
 
 		cock_in_db(user_id, "cocksize_day", cock_size)
 
